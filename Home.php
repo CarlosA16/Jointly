@@ -14,7 +14,7 @@
         <button>Explore</button>
         <h1>Jointly</h1>
         <button>Notifications</button>
-        <button>Messages</button>
+        <input type="button" href = "message_home.php">Messages</input>
         <button>Upload</button>
     </div>
     
