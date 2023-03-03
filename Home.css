@@ -1,0 +1,13 @@
+body{
+    background:lightgray;
+    color: white;
+}
+#main{
+    display:flex; 
+    justify-content:center; 
+    gap:20px;
+}
+button{
+    height: 35px;
+    margin-top: 25px;
+}
