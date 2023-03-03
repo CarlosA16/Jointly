@@ -2,6 +2,11 @@ body{
     background:lightgray;
     color: white;
 }
+#header{
+    display:flex; 
+    justify-content:space-around; 
+    gap:20px;
+}
 #main{
     display:flex; 
     justify-content:center; 
@@ -10,4 +15,42 @@ body{
 button{
     height: 35px;
     margin-top: 25px;
+}
+#feed{
+    display:flex; 
+    justify-content:center; 
+}
+#post{
+    display: flex;
+    flex-direction: column;
+}
+#post img{
+    width: 400px;
+    height: 400px;
+}
+#postHeader{
+    display: flex;
+    flex-direction: row;
+}
+#postHeader img{
+    width: 40px;
+    height: 40px;
+    margin-top: 30px;
+}
+#postHeader p{
+    margin-top: 40px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+}
+#likes{
+    display: flex;
+}
+#count{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 4px;
+}
+#desc{
+    width: 400px;
+    margin-top: -4px;
 }
