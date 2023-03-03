@@ -5,6 +5,8 @@
     <body>
     <?php include 'register_submit.php' ?>
         <form action="register.php" method="POST">
+            <label for="userName">Username: </label>
+            <input name="userName" type="text">
             <label for="firstName">First Name: </label>
             <input name="firstName" type="text">
             <label for="lastName">Last Name: </label>
