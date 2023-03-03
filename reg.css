@@ -1,27 +1,19 @@
 body {
-    background-color: aquamarine;
+    background-color: rgb(245, 32, 99);
 }
 
-#log_box {
+#reg_box {
     background-color: aliceblue;
-<<<<<<< Updated upstream
-=======
     font-family: sans-serif;
     text-align: center;
->>>>>>> Stashed changes
     width: 30%;
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
     border: 2px solid black;
-<<<<<<< Updated upstream
-    text-align: center;
-    font-family: sans-serif;
-=======
 }
 
 .header {
     text-align: center;
->>>>>>> Stashed changes
 }
