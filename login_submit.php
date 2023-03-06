@@ -1,7 +1,6 @@
 <?php
 // DB connection
 include 'db_conn.php';
-echo 'updated.';
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST['mail'];
     $password = $_POST['pass'];
@@ -11,12 +10,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $row = pg_fetch_assoc($result);
 
-    // Test db pass to form
-    if(strval($row['password']) == strval($password)){
-        header("Location: /Capstone_Project/Jointly/feed.php");
+    // Test db credentials to form
+    if(strval($row['email']) == strval($email)){
+        if(strval($row['password']) == strval($password)){
+            header('location:feed.php');
+        } else {
+            echo 'Password incorrect';
+        }
     } else {
-        echo 'Login failed.';
+        echo "Email not found";
     }
+    
 }
 
 pg_close($dbconn);
