@@ -1,0 +1,8 @@
+body {
+    background:lightgray;
+    font-family: sans-serif;
+}
+
+header {
+    border-bottom: 2px solid black;
+}
