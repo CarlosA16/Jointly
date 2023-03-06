@@ -3,6 +3,7 @@
   <head>
   <link rel="stylesheet" href="Message_home.css">
     <title>Message Page</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='message.css'>
   </head>
   <body>
     <header>
