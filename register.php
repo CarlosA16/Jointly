@@ -16,7 +16,7 @@
             <label for="pass">Password:</label><br>
             <input type="password" id="pass" name="pass"><br><br>
             <input type="submit" value="Submit"><br><br>
-            <a href="login.html">already have an account?</a>
+            <a href="login.php">already have an account?</a>
         </form>
     </div>
 </body>
