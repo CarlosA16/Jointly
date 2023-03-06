@@ -1,7 +1,20 @@
 body {
     background-color: aquamarine;
 }
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 3px;
+}
+input {
+    width: 80%;
+    margin: 0 auto;
+}
 
+label {
+    padding: 3px;
+}
 #log_box {
     background-color: aliceblue;
     width: 30%;
@@ -12,4 +25,9 @@ body {
     border: 2px solid black;
     text-align: center;
     font-family: sans-serif;
+}
+
+button {
+    width: 30%;
+    margin: 0 auto;
 }
