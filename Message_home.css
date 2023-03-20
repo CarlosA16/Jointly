@@ -1,0 +1,29 @@
+body{
+    background:lightgray;
+    color: black;
+    justify-content: center;
+    padding-left: 35%;
+}
+
+header{
+    margin-bottom: 10%;
+}
+
+#main{
+    display:flex; 
+    justify-content:center; 
+    gap:20px;
+    margin-top: 35%;
+}
+button{
+    height: 35px;
+    margin-top: 25px;
+}
+
+#send{    
+    margin-top: 25%;
+}
+
+footer{
+    padding-top: 10%;
+}

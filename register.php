@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
@@ -17,7 +16,23 @@
             <input type="password" id="pass" name="pass"><br><br>
             <input type="submit" value="Submit"><br><br>
             <a href="login.php">already have an account?</a>
+    <head>
+        <title></title>
+    </head>
+    <body>
+    <?php include 'register_submit.php' ?>
+        <form action="register.php" method="POST">
+            <label for="userName">Username: </label>
+            <input name="userName" type="text">
+            <label for="firstName">First Name: </label>
+            <input name="firstName" type="text">
+            <label for="lastName">Last Name: </label>
+            <input name="lastName" type="text">
+            <label for="email">E-mail: </label>
+            <input name="email" type="email">
+            <label for="password">Password: </label>
+            <input name="password" type="password">
+            <button type="submit">Submit</button>
         </form>
-    </div>
-</body>
+    </body>
 </html>
