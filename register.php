@@ -13,15 +13,15 @@
     
         <form action="register.php" method="POST">
             <label for="userName">Username: </label>
-            <input name="userName" type="text">
+            <input name="userName" type="text" required>
             <label for="firstName">First Name: </label>
-            <input name="firstName" type="text">
+            <input name="firstName" type="text" required>
             <label for="lastName">Last Name: </label>
-            <input name="lastName" type="text">
+            <input name="lastName" type="text" required>
             <label for="email">E-mail: </label>
-            <input name="email" type="email">
+            <input name="email" type="email" required>
             <label for="password">Password: </label>
-            <input name="password" type="password">
+            <input name="password" type="password" required>
             <button type="submit">Submit</button>
             <a href="login.php">already have an account?</a>
         </form>
