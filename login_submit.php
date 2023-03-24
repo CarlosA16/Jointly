@@ -2,11 +2,18 @@
 session_start();
 // DB connection
 include 'db_conn.php';
+
+// flash message
+if(isset($_SESSION["flash"])){
+    $message = vprintf("<p class='flash %s'>%s</p>", $_SESSION["flash"]);
+    unset($_SESSION["flash"]);
+}
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST['mail'];
     $password = $_POST['pass'];
 
-    $query = "SELECT email, password FROM users WHERE email = $1";
+    $query = "SELECT email, password, username FROM users WHERE email = $1";
     $result = pg_query_params($dbconn, $query, array($email));
 
     $row = pg_fetch_assoc($result);
@@ -16,20 +23,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Test db credentials to form
     if(strval($row['email']) == strval($email)){
         if(password_verify($password, $hashed_password) == TRUE){
-            header('location:feed.php');
+            $_SESSION["active_user"] = $row['username'];
+            header("location:feed.php");
+            exit();
         } else {
-            echo 'Password incorrect';
+            $_SESSION["flash"] = ["type" => "error", "message" => "Password incorrect, please try again."];
         }
     } else {
-        echo "Email not found";
+        $_SESSION["flash"] = ["type" => "error", "message" => "Email not found."];
     }
     
 }
-// flash message
-if(isset($_SESSION["flash"])){
-    $message = vprintf("<p class='flash %s'>%s</p>", $_SESSION["flash"]);
-    unset($_SESSION["flash"]);
-}
+
 
 pg_close($dbconn);
 
