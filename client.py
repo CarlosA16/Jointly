@@ -1,4 +1,5 @@
 import socket
+from flask import request 
 
 HEADER = 64
 
@@ -17,8 +18,9 @@ ADDR = (SERVER, PORT)
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDR)
 
-def send(msg):
-    message = msg.encode(FORMAT)
+def send():
+    request.method == 'POST'
+    message = request.form['mess']
     msg_length = len(message)
     send_length = str(msg_length).encode(FORMAT)
     send_length +=b' ' * (HEADER - len(send_length))
