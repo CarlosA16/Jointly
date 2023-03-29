@@ -7,32 +7,24 @@
     <link rel='stylesheet' type='text/css' media='screen' href='register.css'>
 </head>
 <body>
+    <?php include 'register_submit.php' ?>
     <div id="log_box">
         <h2 class="header">SIGN-UP</h2>
-        <form>
-            <label for="pass">Email:</label><br>
-            <input type="email" id="mail" name="mail"><br><br>
-            <label for="pass">Password:</label><br>
-            <input type="password" id="pass" name="pass"><br><br>
-            <input type="submit" value="Submit"><br><br>
-            <a href="login.php">already have an account?</a>
-    <head>
-        <title></title>
-    </head>
-    <body>
-    <?php include 'register_submit.php' ?>
+    
         <form action="register.php" method="POST">
             <label for="userName">Username: </label>
-            <input name="userName" type="text">
+            <input name="userName" type="text" required>
             <label for="firstName">First Name: </label>
-            <input name="firstName" type="text">
+            <input name="firstName" type="text" required>
             <label for="lastName">Last Name: </label>
-            <input name="lastName" type="text">
+            <input name="lastName" type="text" required>
             <label for="email">E-mail: </label>
-            <input name="email" type="email">
+            <input name="email" type="email" required>
             <label for="password">Password: </label>
-            <input name="password" type="password">
+            <input name="password" type="password" required>
             <button type="submit">Submit</button>
+            <a href="login.php">already have an account?</a>
         </form>
-    </body>
+    </div>
+</body>
 </html>

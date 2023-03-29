@@ -1,7 +1,7 @@
 <?php
+session_start();
 // DB connection
-$dbconn = pg_connect("host=localhost dbname=capstone user=aaronwork password=gamecube")
-or die('Could not connect: ' . pg_last_error());
+include 'db_conn.php';
 
 
 
@@ -13,6 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    $password = crypt($password);
     $values = array($userName, $firstName, $lastName, $email, $password);
 
     $query = "INSERT INTO users (username, first_name, last_name, email, password)
@@ -23,6 +24,10 @@ VALUES ($1, $2, $3, $4, $5)";
     if(!$insert_query){
         echo pg_last_error($dbconn);
     }
+    
+    $_SESSION["flash"] = ["type" => "success", "message" => "Account created!"];
+    header("Location: ./login.php");
+    die();
 }
 
 pg_close($dbconn);
