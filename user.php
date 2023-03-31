@@ -10,16 +10,16 @@
 <body>
     <div id="header">
         <div id="main">
-            <img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png">
+            <a href='user.php'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
         </div>
         <div id="main">
-            <button>Home</button>
-            <button>Search</button>
-            <button>Explore</button>
-            <h1><u>Jointly</u></h1>
-            <button>Notifications</button>
-            <button>Messages</button>
-            <button>Upload</button>
+            <button onclick="window.location.href = 'feed.php';">Home</button>
+            <button onclick="window.location.href = 'feed.php';">Search</button>
+            <button onclick="window.location.href = 'feed.php';">Explore</button>
+            <h1>Jointly</h1>
+            <button onclick="window.location.href = 'feed.php';">Notifications</button>
+            <button onclick="window.location.href = 'message_home.php';">Messages</button>
+            <button onclick="window.location.href = 'upload.php';">Upload</button>
         </div>
         <div id="main">
             <button>Logout</button>

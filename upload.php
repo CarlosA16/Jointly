@@ -10,16 +10,16 @@
 <body>
     <div id="header">
         <div id="main">
-            <img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png">
+            <a href='user.php'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
         </div>
         <div id="main">
-            <button>Home</button>
-            <button>Search</button>
-            <button>Explore</button>
+            <button onclick="window.location.href = 'feed.php';">Home</button>
+            <button onclick="window.location.href = 'feed.php';">Search</button>
+            <button onclick="window.location.href = 'feed.php';">Explore</button>
             <h1>Jointly</h1>
-            <button>Notifications</button>
-            <button>Messages</button>
-            <button>Upload</button>
+            <button onclick="window.location.href = 'feed.php';">Notifications</button>
+            <button onclick="window.location.href = 'message_home.php';">Messages</button>
+            <button onclick="window.location.href = 'upload.php';">Upload</button>
         </div>
         <div id="main">
             <form method="POST">
@@ -27,7 +27,27 @@
             </form>
         </div>
     </div>
-    <img id="defaultImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Square_-_black_simple.svg/800px-Square_-_black_simple.svg.png" style="width: 400px;">
+    <img id="defaultImg" src=<?php 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(is_uploaded_file($_FILES["img"]["tmp_name"])){
+            if(empty($_FILES['img']['name']))
+            {
+                echo "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Square_-_black_simple.svg/800px-Square_-_black_simple.svg.png";
+                exit;
+            }else{
+                move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/images/".$_FILES["img"]["name"]);
+                echo "images/".$_FILES["img"]["name"];
+            }
+        }
+    }
+    else{
+        echo "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Square_-_black_simple.svg/800px-Square_-_black_simple.svg.png";
+    }
+    ?> style="width: 400px;">
+    <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        echo '<p>'.$_POST["desc"].'</p>';
+    }
+    ?>
     <form action="upload.php" method="POST" enctype="multipart/form-data">
         <label for="img" style="margin-left:80px;">Select image:</label>
         <input type="file" id="img" name="img" accept="image/*">
@@ -37,20 +57,3 @@
     </form>
 </body>
 </html>
-<?php 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    if(is_uploaded_file($_FILES["img"]["tmp_name"])){
-        if(empty($_FILES['img']['name']))
-  	    {
-            echo " File name is empty! ";
-            exit;
-        }
-        $upload_file_name = $_FILES['my_upload']['name'];
-        $dest=__DIR__.'/uploads/'.$upload_file_name;
-        if (move_uploaded_file($_FILES['my_upload']['tmp_name'], $dest)) 
-        {
-            
-            echo 'File Has Been Uploaded !';
-        }
-    }
-}
