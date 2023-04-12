@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    include 'db_conn.php';
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +41,11 @@
                 exit;
             }else{
                 move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/images/".$_FILES["img"]["name"]);
-                echo "images/".$_FILES["img"]["name"];
+                $location = "images/".$_FILES["img"]["name"];
+                echo $location;
+                $desc = $_POST["desc"];
+                $query = "INSERT INTO upload(image,description) VALUES ($1,$2)";
+                pg_query_params($dbconn, $query, array($location,$desc));
             }
         }
     }
