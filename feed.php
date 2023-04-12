@@ -8,7 +8,6 @@
     <title>Jointly</title>
 </head>
 <body>
-    <?php include 'logout.php'; ?>
     <div id="header">
         <div id="main">
             <a href='user.php'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
@@ -23,7 +22,7 @@
             <button onclick="window.location.href = 'upload.php';">Upload</button>
         </div>
         <div id="main">
-            <form method="POST">
+            <form action="logout.php" method="POST">
                 <button name="logout_btn">Logout</button>
             </form>
         </div>

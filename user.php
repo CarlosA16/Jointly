@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jointly</title>
+    
 </head>
 <body>
     <div id="header">
@@ -22,14 +23,19 @@
             <button onclick="window.location.href = 'upload.php';">Upload</button>
         </div>
         <div id="main">
-            <button>Logout</button>
+            <form action="logout.php" method="POST">
+                <button name="logout_btn">Logout</button>
+            </form>
         </div>
     </div>
     <div id="body">
         <div id="profile">
             <h2><u>Profile Picture:</u></h2>
-            <img style="height: 500px;" src="IMG_1516.jpg">
-            <button>Update Picture</button>
+            <img id="output" style="height: 500px; width: 300px;" src="get_img.php">
+            <form action="img_save.php" method="POST" enctype="multipart/form-data">
+                <input type="file" accept="image/jpeg, image/png, image/jpg" name="fileToUpload" onchange="loadFile(event)">
+                <input type="submit">Submit</input>
+            </form>
         </div>
         <div id="posts">
             <h2><u>Posts</u></h2>
@@ -69,5 +75,29 @@
             <u>See All Joinees</u>
         </div>
     </div>
+    <script>
+        // create blob object to display (image) in output
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            console.log(event.target.files[0].name)
+
+            // var data = event.target.files[0].name;
+            // var data_str = new String()
+            // var xmlhttp = new XMLHttpRequest();
+            // xmlhttp.onreadystatechange = function() {
+            // // if (this.readyState == 4 && this.status == 200) {
+            // //         document.getElementById("txtHint").innerHTML = this.responseText;
+            // //     }
+            // // };
+            //     console.log('xmlhttp sent')
+            //     xmlhttp.open("POST", "user_save.php", true);
+            //     xmlhttp.send(data);
+            // }
+        };
+        
+
+        // send ajax request (json) to php to read json
+    </script>
 </body>
 </html>
