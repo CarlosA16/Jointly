@@ -45,6 +45,7 @@ button{
 }
 #likes{
     display: flex;
+    justify-content: space-evenly;
 }
 #count{
     margin-top: 10px;
@@ -62,4 +63,7 @@ button{
 }
 h1{
     border-bottom: 2px dotted white;
+}
+#udate{
+    padding-left: 40%;
 }

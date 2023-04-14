@@ -44,8 +44,8 @@
                 $location = "images/".$_FILES["img"]["name"];
                 echo $location;
                 $desc = $_POST["desc"];
-                $query = "INSERT INTO upload(image,description) VALUES ($1,$2)";
-                pg_query_params($dbconn, $query, array($location,$desc));
+                $query = "INSERT INTO upload(image,uploaddate,description,likes,comments,shares) VALUES ($1,$2,$3,$4,$5,$6)";
+                pg_query_params($dbconn, $query, array($location,date("m/d/Y"),$desc,0,0,0));
             }
         }
     }
