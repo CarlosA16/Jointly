@@ -34,7 +34,7 @@
             <img id="output" style="height: 500px; width: 300px;" src="get_img.php">
             <form action="img_save.php" method="POST" enctype="multipart/form-data">
                 <input type="file" accept="image/jpeg, image/png, image/jpg" name="fileToUpload" onchange="loadFile(event)">
-                <input type="submit">Submit</input>
+                <input type="submit"></input>
             </form>
         </div>
         <div id="posts">
@@ -80,24 +80,7 @@
         var loadFile = function(event) {
             var output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);
-            console.log(event.target.files[0].name)
-
-            // var data = event.target.files[0].name;
-            // var data_str = new String()
-            // var xmlhttp = new XMLHttpRequest();
-            // xmlhttp.onreadystatechange = function() {
-            // // if (this.readyState == 4 && this.status == 200) {
-            // //         document.getElementById("txtHint").innerHTML = this.responseText;
-            // //     }
-            // // };
-            //     console.log('xmlhttp sent')
-            //     xmlhttp.open("POST", "user_save.php", true);
-            //     xmlhttp.send(data);
-            // }
-        };
-        
-
-        // send ajax request (json) to php to read json
+        }
     </script>
 </body>
 </html>
