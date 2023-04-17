@@ -20,6 +20,7 @@ button{
     display:flex; 
     justify-content:center; 
     flex-direction: column;
+    margin-top: -200px;
 }
 #post{
     display: flex;
@@ -66,4 +67,29 @@ h1{
 }
 #udate{
     padding-left: 40%;
+}
+#trending{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+#trending a{
+    text-decoration : underline; 
+    color : white;
+    margin-left:-25px;
+}
+#stories{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+#stories a{
+    text-decoration : underline; 
+    color : white;
+    font-size: 20px;
+}
+#stories a img{
+    height: 100px;
 }

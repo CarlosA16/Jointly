@@ -45,8 +45,37 @@
     </div>
     <div id="layout">
         <div id="trending">
-            <h1 style="margin-right:15px;">Trending</h1>
-            <a href="feed.php" style="text-decoration : underline; color : white;margin-left:-25px;">Thaddeus Stevens College</a>
+            <h1 style="margin-right:25px;">Trending</h1>
+            <a href="feed.php">Thaddeus Stevens College</a>
+            <a href="feed.php">Lancaster, Pennsylvania</a>
+            <a href="feed.php">Easter 2023</a>
+            <a href="feed.php">Prom 2023</a>
+            <a href="feed.php">Graduation</a>
+            <a href="feed.php">Graduation Ceremony</a>
+            <a href="feed.php">Class of 2023</a>
+            <a href="feed.php">Funny Memes</a>
+            <a href="feed.php">Jobs Near Me</a>
+            <a href="feed.php">SGA President</a>
+            <a href="feed.php">Dorm Life</a>
+            <a href="feed.php">Jointly</a>
+            <a href="feed.php">Carlos Almanzar</a>
+            <a href="feed.php">Zach Deal</a>
+            <a href="feed.php">Justice Kipp</a>
+            <a href="feed.php">Aaron Work</a>
+            <a href="feed.php">Computer Software Engineer</a>
+            <a href="feed.php">Donald Trump</a>
+            <a href="feed.php">Joe Biden</a>
+            <a href="feed.php">Economic Crisis</a>
+            <a href="feed.php">Russia</a>
+            <a href="feed.php">Ukrane</a>
+            <a href="feed.php">China</a>
+            <a href="feed.php">Covid-19</a>
+            <a href="feed.php">Elon Musk</a>
+            <a href="feed.php">Twitter</a>
+            <a href="feed.php">Tesla</a>
+            <a href="feed.php">Art</a>
+            <a href="feed.php">Music</a>
+            <a href="feed.php">Travel</a>
         </div>
         <div id="feed">
             <?php
@@ -73,10 +102,22 @@
                         </div>';
                 }
             ?>
-            
         </div>
-        <div id="online">
+        <div id="stories">
             <h1>Stories</h1>
+            <a href="feed.php">Top Joinees</a>
+            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href="feed.php">Top Influencers</a>
+            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href="feed.php">Most Recent</a>
+            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href="feed.php">See All...</a>
         </div>
    </div>
 </body>
