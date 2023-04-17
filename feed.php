@@ -13,6 +13,12 @@
         $comments[] = $row[7];
         $shares[] = $row[8];
     }
+    if(isset($_GET['like'])){
+        $i = $_GET['like'];
+        $query = "UPDATE upload SET likes = likes+1 WHERE image = '$i'";
+        pg_query($dbconn,$query);
+        header("Refresh:0; url=feed.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,14 +94,14 @@
                             </div>
                             <img style="margin-top: 4px;margin-bottom: 4px;" src="'.$image[$i].'">
                             <div id="likes">
-                                <img style="width:30px;height:30px;" src="https://cdn-icons-png.flaticon.com/512/25/25297.png">
-                                <p id="count">'.$likes[$i].'</p>
+                                <a href="feed.php?like='.$image[$i].'"><img style="width:30px;height:30px;" src="https://cdn-icons-png.flaticon.com/512/25/25297.png"></a>
+                                <p id="likecount">'.$likes[$i].'</p>
                                 <p id="count">likes</p>
                                 <img style="width:35px;height:37px;margin-left:35px;margin-top:-2px" src="https://static.thenounproject.com/png/1314304-200.png">
-                                <p id="count">'.$comments[$i].'</p>
+                                <p id="commentcount">'.$comments[$i].'</p>
                                 <p id="count">comments</p>
                                 <img style="width:30px;height:30px;margin-left:35px;margin-top:3px" src="https://www.pngkey.com/png/full/147-1475657_share-png-share-icon-png.png">
-                                <p id="count">'.$shares[$i].'</p>
+                                <p id="sharecount">'.$shares[$i].'</p>
                                 <p id="count">shares</p>
                             </div>
                             <p id="desc">'.$desc[$i].'</p>
