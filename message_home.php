@@ -24,18 +24,6 @@
       </section>
     </main>
       
-      <section id="send">
-        <h2>send</h2>
-        <form>
-          <label for="to">To:</label>
-          <input type="text" id="to" name="to">
-
-          <label for="message">Message:</label>
-          <input id="message" name="message"></input>
-
-          <input type="submit" value="Send">
-        </form>
-      </section>
     
 
     <footer>
