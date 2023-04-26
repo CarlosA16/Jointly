@@ -2,16 +2,19 @@
     session_start();
     include 'db_conn.php';
     $image=[];
-    $query = "Select * From upload";
-    $result=pg_query($dbconn,$query);
-    while ($row = pg_fetch_row($result)) {
-        $user[] = $row[1];
-        $image[] = $row[2];
-        $date[] = $row[3];
-        $desc[] = $row[5];
-        $likes[] = $row[6];
-        $comments[] = $row[7];
-        $shares[] = $row[8];
+    if(isset($_GET['search'])){
+        $searching = $_GET['search'];
+        $query = "SELECT * FROM upload WHERE description LIKE '%$searching%'";
+        $result=pg_query($dbconn,$query);
+        while ($row = pg_fetch_row($result)) {
+            $user[] = $row[1];
+            $image[] = $row[2];
+            $date[] = $row[3];
+            $desc[] = $row[5];
+            $likes[] = $row[6];
+            $comments[] = $row[7];
+            $shares[] = $row[8];
+        }
     }
     if(isset($_GET['like'])){
         if(isset($_GET['postLiked'])){
@@ -25,11 +28,9 @@
             $i = $_GET['like'];
             $query = "UPDATE upload SET likes = likes+1 WHERE image = '$image[$i]'";
             pg_query($dbconn,$query);
-            header('Refresh:0; url=feed.php?postLiked='.$image[$i].'');
+            header('Refresh:0; url=search.php?search='.$searching.'&postLiked='.$image[$i].'');
         }
-        
     }
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,41 +61,16 @@
             </form>
         </div>
     </div>
-    <div id="layout">
-        <div id="trending">
-            <h1 style="margin-right:25px;">Trending</h1>
-            <a href="search.php?search=Thaddeus">Thaddeus Stevens College</a>
-            <a href="search.php?search=Lancaster">Lancaster, Pennsylvania</a>
-            <a href="search.php?search=Easter">Easter 2023</a>
-            <a href="search.php?search=Prom">Prom 2023</a>
-            <a href="search.php?search=Graduation">Graduation</a>
-            <a href="search.php?search=Ceremony">Graduation Ceremony</a>
-            <a href="search.php?search=Class">Class of 2023</a>
-            <a href="search.php?search=Memes">Funny Memes</a>
-            <a href="search.php?search=Jobs">Jobs Near Me</a>
-            <a href="search.php?search=SGA">SGA President</a>
-            <a href="search.php?search=Dorm">Dorm Life</a>
-            <a href="search.php?search=Jointly">Jointly</a>
-            <a href="search.php?search=Carlos Almanzar">Carlos Almanzar</a>
-            <a href="search.php?search=Zach Deal">Zach Deal</a>
-            <a href="search.php?search=Justice Kipp">Justice Kipp</a>
-            <a href="search.php?search=Aaron Work">Aaron Work</a>
-            <a href="search.php?search=Software Engineer">Computer Software Engineer</a>
-            <a href="search.php?search=Trump">Donald Trump</a>
-            <a href="search.php?search=Biden">Joe Biden</a>
-            <a href="search.php?search=Crisis">Economic Crisis</a>
-            <a href="search.php?search=Russia">Russia</a>
-            <a href="search.php?search=Ukrane">Ukrane</a>
-            <a href="search.php?search=China">China</a>
-            <a href="search.php?search=Covid">Covid-19</a>
-            <a href="search.php?search=Elon">Elon Musk</a>
-            <a href="search.php?search=Twitter">Twitter</a>
-            <a href="search.php?search=Tesla">Tesla</a>
-            <a href="search.php?search=Art">Art</a>
-            <a href="search.php?search=Music">Music</a>
-            <a href="search.php?search=Travel">Travel</a>
-        </div>
+    <div id="layout" style="margin-top: 200px;">
         <div id="feed">
+            <div style="display:flex; flex-direction:row; gap: 20px;">
+                <h2>Search: </h2>
+                <form action="search.php" method="GET" style="margin-top: 24px;">
+                    <input id="search" name="search" type="text">
+                    <input type="submit">
+                </form>
+            </div>
+            
             <?php
                 for($i=count($image)-1;$i>=0;$i--){
                     $liked = '';
@@ -118,7 +94,7 @@
                             </div>
                             <img style="margin-top: 4px;margin-bottom: 4px;" src="'.$image[$i].'">
                             <div id="likes">
-                                <a href="feed.php?like='.$i.$liked.'"><img style="width:30px;height:30px;" src="'.$likeLink.'"></a>
+                                <a href="search.php?search='.$searching.'&like='.$i.$liked.'"><img style="width:30px;height:30px;" src="'.$likeLink.'"></a>
                                 <p id="likecount">'.$likes[$i].'</p>
                                 <p id="count">likes</p>
                                 <img style="width:35px;height:37px;margin-left:35px;margin-top:-2px" src="https://static.thenounproject.com/png/1314304-200.png">
@@ -132,22 +108,6 @@
                         </div>';
                 }
             ?>
-        </div>
-        <div id="stories">
-            <h1>Stories</h1>
-            <a href="feed.php">Top Joinees</a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href="feed.php">Top Influencers</a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href="feed.php">Most Recent</a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href="feed.php">See All...</a>
         </div>
    </div>
 </body>
