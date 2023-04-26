@@ -14,11 +14,22 @@
         $shares[] = $row[8];
     }
     if(isset($_GET['like'])){
-        $i = $_GET['like'];
-        $query = "UPDATE upload SET likes = likes+1 WHERE image = '$i'";
-        pg_query($dbconn,$query);
-        header("Refresh:0; url=feed.php");
+        if(isset($_GET['postLiked'])){
+            $i = $_GET["like"];
+            $query = "UPDATE upload SET likes = likes-1 WHERE image = '$image[$i]'";
+            pg_query($dbconn,$query);
+            echo '<script>alert("Post Disliked!")</script>';
+            header('Refresh:0; url=feed.php');
+        }
+        else{
+            $i = $_GET['like'];
+            $query = "UPDATE upload SET likes = likes+1 WHERE image = '$image[$i]'";
+            pg_query($dbconn,$query);
+            header('Refresh:0; url=feed.php?postLiked='.$image[$i].'');
+        }
+        
     }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +97,19 @@
         <div id="feed">
             <?php
                 for($i=count($image)-1;$i>=0;$i--){
+                    $liked = '';
+                    if(isset($_GET['postLiked'])){
+                        if($_GET['postLiked']==$image[count($image)-1] && $i==count($image)-1){
+                            $likeLink = 'https://www.pngplay.com/wp-content/uploads/7/Heart-Symbol-Transparent-PNG.png';
+                            $liked = '&postLiked='.count($image)-1;
+                        }
+                        else{
+                            $likeLink = 'https://www.svgrepo.com/show/155235/heart-outline.svg';
+                        }
+                    }
+                    else{
+                        $likeLink = 'https://www.svgrepo.com/show/155235/heart-outline.svg';
+                    }
                     echo '<div id="post">
                             <div id="postHeader">
                                 <img src="https://cdn-icons-png.flaticon.com/512/39/39475.png">
@@ -94,7 +118,7 @@
                             </div>
                             <img style="margin-top: 4px;margin-bottom: 4px;" src="'.$image[$i].'">
                             <div id="likes">
-                                <a href="feed.php?like='.$image[$i].'"><img style="width:30px;height:30px;" src="https://cdn-icons-png.flaticon.com/512/25/25297.png"></a>
+                                <a href="feed.php?like='.$i.$liked.'"><img style="width:30px;height:30px;" src="'.$likeLink.'"></a>
                                 <p id="likecount">'.$likes[$i].'</p>
                                 <p id="count">likes</p>
                                 <img style="width:35px;height:37px;margin-left:35px;margin-top:-2px" src="https://static.thenounproject.com/png/1314304-200.png">
