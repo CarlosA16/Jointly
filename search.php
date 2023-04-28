@@ -61,7 +61,7 @@
             </form>
         </div>
     </div>
-    <div id="layout" style="margin-top: 200px;">
+    <div id="layout" style="margin-top: 0px;">
         <div id="feed">
             <div style="display:flex; flex-direction:row; gap: 20px;">
                 <h2>Search: </h2>

@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $password = $_POST['password'];
     $profile_img = null;
 
-    $password = crypt($password);
+    $password = crypt($password, 'MD5');
     $values = array($userName, $firstName, $lastName, $email, $password, $profile_img);
 
     $query = "INSERT INTO users (username, first_name, last_name, email, password, profile_image)
