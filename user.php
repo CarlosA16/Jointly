@@ -9,6 +9,7 @@
     
 </head>
 <body>
+    <?php session_start(); ?>
     <div id="header">
         <div id="main">
             <a href='user.php?user=<?php session_start(); echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
@@ -88,6 +89,17 @@
             var output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);
         }
+        var user_requested = "<?php echo isset($_GET['user']) ? $_GET['user'] : ''; ?>";
+        var user_active = "<?php echo $_SESSION['active_user']; ?>";
+        
+        if(user_requested == user_active){
+            document.getElementById("myForm").style.display = "block";
+        } else if (user_requested !== "" && user_requested !== user_active) {
+            document.getElementById("myForm").style.display = "none";
+        } else if (user_requested == user_active && user_active == '') {
+            document.getElementById("myForm").style.display = "none";
+        }
+
     </script>
 </body>
 </html>
