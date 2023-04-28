@@ -11,7 +11,7 @@
 <body>
     <div id="header">
         <div id="main">
-            <a href='user.php'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php?user=<?php session_start(); echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
         </div>
         <div id="main">
             <button onclick="window.location.href = 'feed.php';">Home</button>
@@ -33,7 +33,6 @@
             <h2><u>Profile Picture:</u></h2>
             <img id="output" style="height: 500px; width: 300px;" src="get_img.php">
             <?php 
-                session_start();
                 if(isset($_GET['user'])){
                     if($_SESSION["active_user"]==$_GET['user']){
                         echo '<form action="img_save.php" method="POST" enctype="multipart/form-data">
