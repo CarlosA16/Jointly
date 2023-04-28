@@ -9,6 +9,7 @@
     
 </head>
 <body>
+    <?php session_start(); ?>
     <div id="header">
         <div id="main">
             <a href='user.php'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
@@ -31,18 +32,11 @@
     <div id="body">
         <div id="profile">
             <h2><u>Profile Picture:</u></h2>
-            <img id="output" style="height: 500px; width: 300px;" src="get_img.php">
-            <?php 
-                session_start();
-                if(isset($_GET['user'])){
-                    if($_SESSION["active_user"]==$_GET['user']){
-                        echo '<form action="img_save.php" method="POST" enctype="multipart/form-data">
-                                <input type="file" accept="image/jpeg, image/png, image/jpg" name="fileToUpload" onchange="loadFile(event)">
-                                <input type="submit"></input>
-                              </form>';
-                    }
-                }
-            ?>
+            <img id="output" style="height: 500px; width: 300px;" src="get_user_image.php?user=<?php echo $_GET['user']?>">
+            <form id="myForm" action="img_save.php" method="POST" enctype="multipart/form-data">
+                <input type="file" accept="image/jpeg, image/png, image/jpg" name="fileToUpload" onchange="loadFile(event)">
+                <input type="submit"></input>
+            </form>
             
         </div>
         <div id="posts">
@@ -89,6 +83,17 @@
             var output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);
         }
+        var user_requested = "<?php echo isset($_GET['user']) ? $_GET['user'] : ''; ?>";
+        var user_active = "<?php echo $_SESSION['active_user']; ?>";
+        
+        if(user_requested == user_active){
+            document.getElementById("myForm").style.display = "block";
+        } else if (user_requested !== "" && user_requested !== user_active) {
+            document.getElementById("myForm").style.display = "none";
+        } else if (user_requested == user_active && user_active == '') {
+            document.getElementById("myForm").style.display = "none";
+        }
+
     </script>
 </body>
 </html>
