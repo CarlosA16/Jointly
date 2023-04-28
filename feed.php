@@ -113,7 +113,7 @@
                     echo '<div id="post">
                             <div id="postHeader">
                                 <img src="https://cdn-icons-png.flaticon.com/512/39/39475.png">
-                                <p id="userName">'.$user[$i].'</p>
+                                <a href="user.php?user='.$user[$i].'"><p id="userName">'.$user[$i].'</p></a>
                                 <p id="udate">'.$date[$i].'</p>
                             </div>
                             <img style="margin-top: 4px;margin-bottom: 4px;" src="'.$image[$i].'">
