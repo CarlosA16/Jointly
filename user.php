@@ -32,10 +32,18 @@
         <div id="profile">
             <h2><u>Profile Picture:</u></h2>
             <img id="output" style="height: 500px; width: 300px;" src="get_img.php">
-            <form action="img_save.php" method="POST" enctype="multipart/form-data">
-                <input type="file" accept="image/jpeg, image/png, image/jpg" name="fileToUpload" onchange="loadFile(event)">
-                <input type="submit"></input>
-            </form>
+            <?php 
+                session_start();
+                if(isset($_GET['user'])){
+                    if($_SESSION["active_user"]==$_GET['user']){
+                        echo '<form action="img_save.php" method="POST" enctype="multipart/form-data">
+                                <input type="file" accept="image/jpeg, image/png, image/jpg" name="fileToUpload" onchange="loadFile(event)">
+                                <input type="submit"></input>
+                              </form>';
+                    }
+                }
+            ?>
+            
         </div>
         <div id="posts">
             <h2><u>Posts</u></h2>
