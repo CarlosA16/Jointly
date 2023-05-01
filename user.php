@@ -9,14 +9,14 @@
     
 </head>
 <body>
-    <?php session_start(); ?>
+    <?php session_start(); include 'db_conn.php'; ?>
     <div id="header">
         <div id="main">
             <a href='user.php?user=<?php session_start(); echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
         </div>
         <div id="main">
             <button onclick="window.location.href = 'feed.php';">Home</button>
-            <button onclick="window.location.href = 'feed.php';">Search</button>
+            <button onclick="window.location.href = 'search.php';">Search</button>
             <button onclick="window.location.href = 'feed.php';">Explore</button>
             <h1>Jointly</h1>
             <button onclick="window.location.href = 'feed.php';">Notifications</button>
@@ -47,17 +47,37 @@
         </div>
         <div id="posts">
             <h2><u>Posts</u></h2>
-            <div id="posted">
-                <img src="IMG_1516.jpg">
-                <img src="IMG_1516.jpg">
-                <img src="IMG_1516.jpg">
-            </div>
-            <div id="posted">
-                <img src="IMG_1516.jpg">
-                <img src="IMG_1516.jpg">
-                <img src="IMG_1516.jpg">
-            </div>
+            <?php
+                $query = "SELECT * FROM upload WHERE username LIKE '".$_GET['user']."'";
+                $result=pg_query($dbconn,$query);
+                while ($row = pg_fetch_row($result)) {
+                    $link[] = $row[4];
+                    $image[] = $row[2];
+                }
+                $x=3;
+                if(isset($link)){
+                    for($i=count($link)-1;$i>=0;$i--){
+                    if($x%3==0){
+                        echo '<div id="posted">';
+                    }
+                    echo '<a href = "search.php?search='.$link[$i].'"><img src="'.$image[$i].'" style="width:150px;height:150px;"></a>';
+                    if($x==0){
+                        $x=3;
+                        echo '</div>';
+                    }
+                    else{
+                        $x--;
+                    }
+                }
+                }
+                
+            ?>
         </div>
+        <?php
+            if(isset($link)){
+                echo '</div><div>';
+            }
+        ?>
         <div id="Joins">
             <h2><u>Joiners & Joinees</u></h2>
             <div id="followers">
@@ -83,6 +103,7 @@
             <u>See All Joinees</u>
         </div>
     </div>
+    
     <script>
         // create blob object to display (image) in output
         var loadFile = function(event) {

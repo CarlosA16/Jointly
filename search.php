@@ -4,7 +4,7 @@
     $image=[];
     if(isset($_GET['search'])){
         $searching = $_GET['search'];
-        $query = "SELECT * FROM upload WHERE description LIKE '%$searching%' OR username LIKE '%$searching%'";
+        $query = "SELECT * FROM upload WHERE description LIKE '%$searching%' OR username LIKE '%$searching%' OR linktopost LIKE '%$searching%'";
         $result=pg_query($dbconn,$query);
         while ($row = pg_fetch_row($result)) {
             $user[] = $row[1];

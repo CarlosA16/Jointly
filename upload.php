@@ -40,12 +40,17 @@
                 echo "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Square_-_black_simple.svg/800px-Square_-_black_simple.svg.png";
                 exit;
             }else{
+                $que = "SELECT * FROM upload WHERE username LIKE '".$_SESSION["active_user"]."'";
+                $re=pg_query($dbconn,$que);
+                while ($row = pg_fetch_row($re)) {
+                    $pid[] = $row[0]+1;
+                }
                 move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/images/".$_FILES["img"]["name"]);
                 $location = "images/".$_FILES["img"]["name"];
                 echo $location;
                 $desc = $_POST["desc"];
-                $query = "INSERT INTO upload(username,image,uploaddate,description,likes,comments,shares) VALUES ($1,$2,$3,$4,$5,$6,$7)";
-                pg_query_params($dbconn, $query, array($_SESSION["active_user"],$location,date("m/d/Y"),$desc,0,0,0));
+                $query = "INSERT INTO upload(username,image,uploaddate,linktopost,description,likes,comments,shares) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)";
+                pg_query_params($dbconn, $query, array($_SESSION["active_user"],$location,date("m/d/Y"),$_SESSION["active_user"].'_PID_'.$pid[count($pid)-1],$desc,0,0,0));
             }
         }
     }

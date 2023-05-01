@@ -29,6 +29,9 @@ h2{
 #posted{
     margin-left: -100px;
 }
+#posted div{
+    margin-left: 0px;
+}
 #followers{
     display:flex; 
     flex-direction: row;
