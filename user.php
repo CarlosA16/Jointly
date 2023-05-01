@@ -32,7 +32,7 @@
     <div id="body">
         <div id="profile">
             <h2><u>Profile Picture:</u></h2>
-            <img id="output" style="height: 500px; width: 300px;" src="get_img.php">
+            <img id="output" style="height: 300px; width: 300px;" src="get_img.php">
             <?php 
                 if(isset($_GET['user'])){
                     if($_SESSION["active_user"]==$_GET['user']){
