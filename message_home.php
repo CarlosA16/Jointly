@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['script'])) {
+  $script = $_POST['script'];
+  $output = shell_exec("python $script");
+  echo $output;
+}
+?>
+
 <html>
   <head>
   <link rel="stylesheet" href="Message_home.css">
@@ -19,6 +28,9 @@
             <!-- <td> profile pic here</td> -->
             <td><a>Hello!</a></td>
             <td>01/01/2022</td>
+            <form action= runchat() method="post">
+            <button> Open Chat</button>
+            </form>
           </tr>
         </table>
       </section>
