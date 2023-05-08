@@ -8,28 +8,32 @@
         $user[] = $row[1];
         $image[] = $row[2];
         $date[] = $row[3];
+        $link[] = $row[4];
         $desc[] = $row[5];
         $likes[] = $row[6];
         $comments[] = $row[7];
         $shares[] = $row[8];
     }
     if(isset($_GET['like'])){
-        if(isset($_GET['postLiked'])){
+        if(isset($_GET['unl'])){
+            $u = $_SESSION['active_user'];
             $i = $_GET["like"];
             $query = "UPDATE upload SET likes = likes-1 WHERE image = '$image[$i]'";
             pg_query($dbconn,$query);
+            $query = "DELETE FROM likes WHERE postid = '$link[$i]' AND userwholiked = '$u'";
+            pg_query($dbconn,$query);
             echo '<script>alert("Post Disliked!")</script>';
-            header('Refresh:0; url=feed.php');
         }
         else{
             $i = $_GET['like'];
             $query = "UPDATE upload SET likes = likes+1 WHERE image = '$image[$i]'";
             pg_query($dbconn,$query);
-            header('Refresh:0; url=feed.php?postLiked='.$image[$i].'');
+            $query = "INSERT INTO likes (postid,userwholiked) values($1,$2)";
+            pg_query_params($dbconn,$query, array($link[$i],$_SESSION["active_user"],));
         }
-        
+        header('Refresh:0; url=feed.php');
     }
-    
+    $userswholiked=[];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,10 +102,16 @@
             <?php
                 for($i=count($image)-1;$i>=0;$i--){
                     $liked = '';
-                    if(isset($_GET['postLiked'])){
-                        if($_GET['postLiked']==$image[count($image)-1] && $i==count($image)-1){
+                    $query = "Select * From likes Where postid = '$link[$i]'";
+                    $result=pg_query($dbconn,$query);
+                    while ($row = pg_fetch_row($result)) {
+                        $postid[] = $row[0];
+                        $userswholiked[] = $row[1];
+                    }
+                    if(count($userswholiked)>0){
+                        if(in_array($_SESSION['active_user'], $userswholiked) && in_array($link[$i], $postid)){
                             $likeLink = 'https://www.pngplay.com/wp-content/uploads/7/Heart-Symbol-Transparent-PNG.png';
-                            $liked = '&postLiked='.count($image)-1;
+                            $liked = '&unl=t';
                         }
                         else{
                             $likeLink = 'https://www.svgrepo.com/show/155235/heart-outline.svg';
