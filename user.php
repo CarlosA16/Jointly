@@ -54,30 +54,17 @@
                     $link[] = $row[4];
                     $image[] = $row[2];
                 }
-                $x=3;
                 if(isset($link)){
-                    for($i=count($link)-1;$i>=0;$i--){
-                    if($x%3==0){
-                        echo '<div id="posted">';
+                    for($i=0;$i<count($link);$i++){
+                        if($i!=0 && $i%3==0){
+                            echo '<br>';
+                        }
+                        echo '<a href = "search.php?search='.$link[$i].'"><img src="'.$image[$i].'" style="width:150px;height:150px;"></a>';
                     }
-                    echo '<a href = "search.php?search='.$link[$i].'"><img src="'.$image[$i].'" style="width:150px;height:150px;"></a>';
-                    if($x==0){
-                        $x=3;
-                        echo '</div>';
-                    }
-                    else{
-                        $x--;
-                    }
-                }
                 }
                 
             ?>
         </div>
-        <?php
-            if(isset($link)){
-                echo '</div><div>';
-            }
-        ?>
         <div id="Joins">
             <h2><u>Joiners & Joinees</u></h2>
             <div id="followers">
