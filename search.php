@@ -10,16 +10,31 @@
             $user[] = $row[1];
             $image[] = $row[2];
             $date[] = $row[3];
+            $link[] = $row[4];
             $desc[] = $row[5];
             $likes[] = $row[6];
             $comments[] = $row[7];
             $shares[] = $row[8];
         }
+        $query = "SELECT * FROM comments WHERE postid LIKE '%$searching%'";
+        $result=pg_query($dbconn,$query);
+        while ($row = pg_fetch_row($result)){
+            $postid[] = $row[0];
+            $userwhocommented[] = $row[1];
+            $theircomment[] = $row[2];
+        }
+    }
+    $query = "Select * From likes WHERE userwholiked LIKE '".$_SESSION['active_user']."'";
+    $result=pg_query($dbconn,$query);
+    while ($row = pg_fetch_row($result)) {
+        $lpost[] = $row[0];
     }
     if(isset($_GET['like'])){
-        if(isset($_GET['postLiked'])){
+        if(in_array($link[$_GET["like"]],$lpost)=='1'){
             $i = $_GET["like"];
             $query = "UPDATE upload SET likes = likes-1 WHERE image = '$image[$i]'";
+            pg_query($dbconn,$query);
+            $query = "DELETE FROM likes WHERE postid = '$link[$i]' AND userwholiked = '".$_SESSION['active_user']."'";
             pg_query($dbconn,$query);
             echo '<script>alert("Post Disliked!")</script>';
             header('Refresh:0; url=feed.php');
@@ -28,6 +43,8 @@
             $i = $_GET['like'];
             $query = "UPDATE upload SET likes = likes+1 WHERE image = '$image[$i]'";
             pg_query($dbconn,$query);
+            $query = "INSERT INTO likes (postid,userwholiked) values($1,$2)";
+            pg_query_params($dbconn,$query, array($link[$i],$_SESSION["active_user"],));
             header('Refresh:0; url=search.php?search='.$searching.'&postLiked='.$image[$i].'');
         }
     }
@@ -74,17 +91,20 @@
             <?php
                 for($i=count($image)-1;$i>=0;$i--){
                     $liked = '';
+                    if(in_array($link[$i],$lpost)=='1'){
+                        $likeLink = 'https://www.pngplay.com/wp-content/uploads/7/Heart-Symbol-Transparent-PNG.png';
+                    }
+                    else{
+                        $likeLink = 'https://www.svgrepo.com/show/155235/heart-outline.svg';
+                    }
                     if(isset($_GET['postLiked'])){
-                        if($_GET['postLiked']==$image[count($image)-1] && $i==count($image)-1){
+                        if($likeLink == 'https://www.svgrepo.com/show/155235/heart-outline.svg'){
                             $likeLink = 'https://www.pngplay.com/wp-content/uploads/7/Heart-Symbol-Transparent-PNG.png';
                             $liked = '&postLiked='.count($image)-1;
                         }
                         else{
-                            $likeLink = 'https://www.svgrepo.com/show/155235/heart-outline.svg';
+                            $likeLink = 'https://www.pngplay.com/wp-content/uploads/7/Heart-Symbol-Transparent-PNG.png';
                         }
-                    }
-                    else{
-                        $likeLink = 'https://www.svgrepo.com/show/155235/heart-outline.svg';
                     }
                     echo '<div id="post">
                             <div id="postHeader">
@@ -106,6 +126,26 @@
                             </div>
                             <p id="desc">'.$desc[$i].'</p>
                         </div>';
+                    echo '<div id="comments">
+                            <form action="search.php" method="GET" style="margin-top: 24px;">
+                                <label>Leave A Comment:</label>
+                                <input id="search" name="search" type="text" hidden="hidden" value="'.$link[$i].'">
+                                <input id="commenting" name="commenting" type="text">
+                                <input type="submit">
+                            </form><br>';
+                    if(isset($_GET['commenting'])){
+                        $query = "INSERT INTO comments(postid,userwhocommented,theircomment) VALUES ($1,$2,$3)";
+                        pg_query_params($dbconn, $query, array($link[$i],$_SESSION["active_user"],$_GET['commenting']));
+                        $query = "UPDATE upload SET comments = comments+1 WHERE linktopost = '$link[$i]'";
+                        pg_query($dbconn,$query);
+                        header('Location: search.php?search='.$link[$i]);
+                    }
+                    if(isset($postid)){
+                        for($k=0;$k<count($postid);$k++){
+                            echo '<a href="user.php?user='.$userwhocommented[$k].'">'.$userwhocommented[$k].'</a>: '.$theircomment[$k];
+                            echo '<br>';
+                        }
+                    }
                 }
             ?>
         </div>

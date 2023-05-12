@@ -93,3 +93,6 @@ h1{
 #stories a img{
     height: 100px;
 }
+#comments{
+    margin-top: -20px;
+}
