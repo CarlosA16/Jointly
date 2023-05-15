@@ -12,7 +12,7 @@
     <?php session_start(); include 'db_conn.php'; ?>
     <div id="header">
         <div id="main">
-            <a href='user.php?user=<?php session_start(); echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php?user=<?php session_start(); echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="get_user_image.php?user=<?php echo $_SESSION['active_user']?>"></a>
         </div>
         <div id="main">
             <button onclick="window.location.href = 'feed.php';">Home</button>
@@ -32,7 +32,7 @@
     <div id="body">
         <div id="profile">
             <h2><u>Profile Picture:</u></h2>
-            <img id="output" style="height: 300px; width: 300px;" src="get_img.php">
+            <img id="output" style="height: 300px; width: 300px;" src="get_user_image.php?user=<?php echo $_GET['user']?>">
             <?php 
                 if(isset($_GET['user'])){
                     if($_SESSION["active_user"]==$_GET['user']){

@@ -47,7 +47,7 @@
 <body>
     <div id="header">
         <div id="main">
-            <a href='user.php?user=<?php echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php?user=<?php echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="get_user_image.php?user=<?php echo $_SESSION['active_user']?>"></a>
         </div>
         <div id="main">
             <button onclick="window.location.href = 'feed.php';">Home</button>
@@ -122,7 +122,7 @@
                     }
                     echo '<div id="post">
                             <div id="postHeader">
-                                <img src="https://cdn-icons-png.flaticon.com/512/39/39475.png">
+                                <img src="get_user_image.php?user='.$user[$i].'">
                                 <a href="user.php?user='.$user[$i].'"><p id="userName">'.$user[$i].'</p></a>
                                 <p id="udate">'.$date[$i].'</p>
                             </div>
@@ -144,20 +144,38 @@
             ?>
         </div>
         <div id="stories">
-            <h1>Stories</h1>
+            <h1>Recommended</h1>
             <a href="feed.php">Top Joinees</a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href="feed.php">Top Influencers</a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href="feed.php">Most Recent</a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href='user.php'><img src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
-            <a href="feed.php">See All...</a>
+            <?php 
+                $query = "Select * From users";
+                $result=pg_query($dbconn,$query);
+                $pf = 0;
+                while ($row = pg_fetch_row($result)) {
+                    $users[] = $row[1];
+                    $pf++;
+                }
+                if($pf>3){
+                    if($pf>6){
+                        if($pf>6){
+                    
+                        }
+                    }
+                }
+                else{
+                    for($i=0;$i<$pf;$i++){
+                        echo '<a href="user.php"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                    }
+                    echo '<a href="feed.php">Top Influencers</a>';
+                    for($i=0;$i<$pf;$i++){
+                        echo '<a href="user.php"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                    }
+                    echo '<a href="feed.php">Most Recent</a>';
+                    for($i=$pf-1;$i>=0;$i--){
+                        echo '<a href="user.php"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                    }
+                }
+                
+            ?>
         </div>
    </div>
 </body>
