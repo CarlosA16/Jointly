@@ -134,7 +134,7 @@
                                 <a href = "search.php?search='.$link[$i].'"><img style="width:35px;height:37px;margin-left:35px;margin-top:-2px" src="https://static.thenounproject.com/png/1314304-200.png"></a>
                                 <p id="commentcount">'.$comments[$i].'</p>
                                 <p id="count">comments</p>
-                                <img style="width:30px;height:30px;margin-left:35px;margin-top:3px" src="https://www.pngkey.com/png/full/147-1475657_share-png-share-icon-png.png">
+                                <a href = "search.php?search='.$link[$i].'&sharing=true"><img style="width:30px;height:30px;margin-left:35px;margin-top:3px" src="https://www.pngkey.com/png/full/147-1475657_share-png-share-icon-png.png"></a>
                                 <p id="sharecount">'.$shares[$i].'</p>
                                 <p id="count">shares</p>
                             </div>

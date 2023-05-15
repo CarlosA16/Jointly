@@ -44,8 +44,25 @@
             $query = "UPDATE upload SET likes = likes+1 WHERE image = '$image[$i]'";
             pg_query($dbconn,$query);
             $query = "INSERT INTO likes (postid,userwholiked) values($1,$2)";
-            pg_query_params($dbconn,$query, array($link[$i],$_SESSION["active_user"],));
+            pg_query_params($dbconn,$query, array($link[$i],$_SESSION["active_user"]));
             header('Refresh:0; url=search.php?search='.$searching.'&postLiked='.$image[$i].'');
+        }
+    }
+    if(isset($_GET['sharing'])){
+        echo '<script>alert("Copy this link and share it with your friends: search.php?search='.$searching.'")</script>';
+        $query = "SELECT * FROM shares WHERE userwhoshared LIKE '".$_SESSION["active_user"]."'";
+        $result=pg_query($dbconn,$query);
+        $userwhoshared = [];
+        while ($row = pg_fetch_row($result)){
+            $spostid[] = $row[0];
+            $userwhoshared[] = $row[1];
+        }
+        if(count($userwhoshared)==0 || !in_array($searching,$spostid)){
+            $query = "INSERT INTO shares (postid,userwhoshared) values($1,$2)";
+            pg_query_params($dbconn,$query, array($searching,$_SESSION["active_user"]));
+            $query = "UPDATE upload SET shares = shares+1 WHERE linktopost = '$searching'";
+            pg_query($dbconn,$query);
+            header('Refresh:0; url=search.php?search='.$searching.'');
         }
     }
 ?>
@@ -120,7 +137,7 @@
                                 <img style="width:35px;height:37px;margin-left:35px;margin-top:-2px" src="https://static.thenounproject.com/png/1314304-200.png">
                                 <p id="commentcount">'.$comments[$i].'</p>
                                 <p id="count">comments</p>
-                                <img style="width:30px;height:30px;margin-left:35px;margin-top:3px" src="https://www.pngkey.com/png/full/147-1475657_share-png-share-icon-png.png">
+                                <a href = "search.php?search='.$link[$i].'&sharing=true"><img style="width:30px;height:30px;margin-left:35px;margin-top:3px" src="https://www.pngkey.com/png/full/147-1475657_share-png-share-icon-png.png"></a>
                                 <p id="sharecount">'.$shares[$i].'</p>
                                 <p id="count">shares</p>
                             </div>
