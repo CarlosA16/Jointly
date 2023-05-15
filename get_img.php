@@ -7,7 +7,7 @@ $result = pg_query_params($dbconn, $query, array($_SESSION['active_user']));
 
 if ($result) {
     $image_bytea = pg_fetch_result($result, 0, 'profile_image');
-
+    
     // Convert the bytea data to a string
     $image_string = pg_unescape_bytea($image_bytea);
 

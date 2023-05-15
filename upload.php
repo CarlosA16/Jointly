@@ -1,7 +1,7 @@
 <?php
     session_start();
     include 'db_conn.php';
-
+    $pid[]=1;
 ?>
 <!DOCTYPE html>
 <html>
