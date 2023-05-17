@@ -26,15 +26,5 @@
         <button type="text" class="submit">Submit</button>
         </div>
     </form>
-    <!-- <div id="log_box">
-        <h2 class="header">LOGIN</h2>
-        <form action="login.php" method="POST">
-            <label for="mail">Email:</label><br>
-            <input type="email" id="mail" name="mail"><br><br>
-            <label for="pass">Password:</label><br>
-            <input type="password" id="pass" name="pass"><br><br>
-            <input type="submit" value="Submit">
-        </form>
-    </div> -->
 </body>
 </html>
