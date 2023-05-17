@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['script'])) {
-  $script = $_POST['script'];
-  $output = shell_exec("python $script");
-  echo $output;
+if ($_GET['run']) {
+  # This code will run if ?run=true is set.
+  exec("client.py");
 }
 ?>
+
 
 <html>
   <head>
@@ -28,10 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['script'])) {
             <!-- <td> profile pic here</td> -->
             <td><a>Hello!</a></td>
             <td>01/01/2022</td>
-            <form action= runchat() method="post">
-            <button> Open Chat</button>
-            </form>
-          </tr>
+            <a href="?run=true">Chat Now!</a>
+           </tr>
         </table>
       </section>
     </main>
