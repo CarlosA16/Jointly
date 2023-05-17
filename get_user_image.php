@@ -13,10 +13,9 @@ if (isset($_GET['user']) && $_GET['user'] !== '') {
     $username = $_SESSION['active_user'];
 }
 
-// $username = $_GET['user'];
 
 $query = "SELECT profile_image FROM users WHERE username = $1";
-// $query = "SELECT profile_image FROM users WHERE username = $1";
+
 $result = pg_query_params($dbconn, $query, array($username));
 
 
