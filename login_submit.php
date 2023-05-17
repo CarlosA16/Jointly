@@ -5,7 +5,7 @@ include 'db_conn.php';
 
 // flash message
 if(isset($_SESSION["flash"])){
-    $message = vprintf("<p class='flash %s'>%s</p>", $_SESSION["flash"]);
+    $message = vprintf("<p style='position: absolute; top: 0;' class='flash %s'>%s</p>", $_SESSION["flash"]);
     unset($_SESSION["flash"]);
 }
 
