@@ -26,11 +26,6 @@ if ($result) {
     // Convert the bytea data to a string
     $image_string = pg_unescape_bytea($image_bytea);
 
-    $img_type = image_type_to_mime_type($image_string);
-    
-    header('Content-Type: '. $img_type);
-
-    
     echo $image_string;
 } else {
     echo "Error executing query: " . pg_last_error($dbconn);

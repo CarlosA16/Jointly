@@ -78,7 +78,7 @@
 <body>
     <div id="header">
         <div id="main">
-            <a href='user.php?user=<?php echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="https://cdn-icons-png.flaticon.com/512/39/39475.png"></a>
+            <a href='user.php?user=<?php echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="get_user_image.php?user=<?php echo $_SESSION['active_user']?>"></a>
         </div>
         <div id="main">
             <button onclick="window.location.href = 'feed.php';">Home</button>
@@ -125,7 +125,7 @@
                     }
                     echo '<div id="post">
                             <div id="postHeader">
-                                <img src="https://cdn-icons-png.flaticon.com/512/39/39475.png">
+                                <img src="get_user_image.php?user='.$user[$i].'">
                                 <p id="userName">'.$user[$i].'</p>
                                 <p id="udate">'.$date[$i].'</p>
                             </div>
