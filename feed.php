@@ -2,7 +2,7 @@
     session_start();
     include 'db_conn.php';
     $image=[];
-    $query = "Select * From upload";
+    $query = "Select * From upload ORDER BY uploaddate ASC; ";
     $result=pg_query($dbconn,$query);
     while ($row = pg_fetch_row($result)) {
         $user[] = $row[1];
@@ -156,22 +156,43 @@
                 }
                 if($pf>3){
                     if($pf>6){
-                        if($pf>6){
-                    
+                        for($i=$pf-3;$i<$pf;$i++){
+                            echo '<a href="user.php?user='.$users[$i].'"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                        }
+                        echo '<a href="feed.php">Top Influencers</a>';
+                        for($i=3;$i<6;$i++){
+                            echo '<a href="user.php?user='.$users[$i].'"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                        }
+                        echo '<a href="feed.php">Most Recent</a>';
+                        for($i=3;$i>=0;$i--){
+                            echo '<a href="user.php?user='.$users[$i].'"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                        }
+                    }
+                    else{
+                        for($i=$pf-3;$i<$pf;$i++){
+                            echo '<a href="user.php?user='.$users[$i].'"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                        }
+                        echo '<a href="feed.php">Top Influencers</a>';
+                        for($i=0;$i<3;$i++){
+                            echo '<a href="user.php?user='.$users[$i].'"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                        }
+                        echo '<a href="feed.php">Most Recent</a>';
+                        for($i=3;$i>0;$i--){
+                            echo '<a href="user.php?user='.$users[$i].'"><img src="get_user_image.php?user='.$users[$i].'"></a>';
                         }
                     }
                 }
                 else{
                     for($i=0;$i<$pf;$i++){
-                        echo '<a href="user.php"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                        echo '<a href="user.php?user='.$users[$i].'"><img src="get_user_image.php?user='.$users[$i].'"></a>';
                     }
                     echo '<a href="feed.php">Top Influencers</a>';
                     for($i=0;$i<$pf;$i++){
-                        echo '<a href="user.php"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                        echo '<a href="user.php?user='.$users[$i].'"><img src="get_user_image.php?user='.$users[$i].'"></a>';
                     }
                     echo '<a href="feed.php">Most Recent</a>';
                     for($i=$pf-1;$i>=0;$i--){
-                        echo '<a href="user.php"><img src="get_user_image.php?user='.$users[$i].'"></a>';
+                        echo '<a href="user.php?user='.$users[$i].'"><img src="get_user_image.php?user='.$users[$i].'"></a>';
                     }
                 }
                 

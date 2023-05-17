@@ -26,6 +26,7 @@
     }
     $query = "Select * From likes WHERE userwholiked LIKE '".$_SESSION['active_user']."'";
     $result=pg_query($dbconn,$query);
+    $lpost = [];
     while ($row = pg_fetch_row($result)) {
         $lpost[] = $row[0];
     }
@@ -126,7 +127,7 @@
                     echo '<div id="post">
                             <div id="postHeader">
                                 <img src="get_user_image.php?user='.$user[$i].'">
-                                <p id="userName">'.$user[$i].'</p>
+                                <a href="user.php?user='.$user[$i].'"><p id="userName">'.$user[$i].'</p></a>
                                 <p id="udate">'.$date[$i].'</p>
                             </div>
                             <img style="margin-top: 4px;margin-bottom: 4px;" src="'.$image[$i].'">

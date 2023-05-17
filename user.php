@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+    include 'db_conn.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +13,9 @@
     
 </head>
 <body>
-    <?php session_start(); include 'db_conn.php'; ?>
     <div id="header">
         <div id="main">
-            <a href='user.php?user=<?php session_start(); echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="get_user_image.php?user=<?php echo $_SESSION['active_user']?>"></a>
+            <a href='user.php?user=<?php echo $_SESSION["active_user"]; ?>'><img style="width:50px; height:50px;margin-left:-40px;margin-right:100px;margin-top:15px;" src="get_user_image.php?user=<?php echo $_SESSION['active_user']?>"></a>
         </div>
         <div id="main">
             <button onclick="window.location.href = 'feed.php';">Home</button>
