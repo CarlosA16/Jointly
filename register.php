@@ -38,6 +38,8 @@
             <label for="password" class="placeholder">Password</>
         </div>
         <button type="text" class="submit">Submit</button>
+        <p>Already Have An Account?</p>
+        <a href="login.php">Log in</a>
         </div>
     </form>
 </body>

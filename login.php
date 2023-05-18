@@ -24,6 +24,8 @@
             <label for="password" class="placeholder">Password</>
         </div>
         <button type="text" class="submit">Submit</button>
+        <p>Don't Have An Account?</p>
+        <a href="register.php">Sign Up</a>
         </div>
     </form>
 </body>
